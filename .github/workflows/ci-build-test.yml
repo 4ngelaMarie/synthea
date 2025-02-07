@@ -1,9 +1,25 @@
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    types: [opened, edited, synchronize]
 
 jobs:
+  new_job_by_angela:
+    runs-on: ubuntu-latest
+    name: Echo
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Print commit author
+        run: |
+          COMMIT_AUTHOR= ${{ github.event.commits[0].author.name }}
+          echo ${{ COMMIT_AUTHOR }}
+
   check_java_latest:
     runs-on: ubuntu-latest
-    name: Java 17
+    name: Angela's Java 17
     
     steps:
       - uses: actions/checkout@v3
