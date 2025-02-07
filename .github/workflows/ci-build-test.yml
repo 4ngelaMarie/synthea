@@ -25,6 +25,7 @@ jobs:
         with:
           password: ${{secrets.MAIL_PASSWORD}}
           subject: Github Actions Test Email
+          server_address: smtp.gmail.com
           to: aalmquis@nmdp.org
           from: aalmquis@nmdp.org
           html_body: file://email.html
