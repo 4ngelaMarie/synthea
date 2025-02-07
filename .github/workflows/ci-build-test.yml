@@ -20,6 +20,16 @@ jobs:
           pwd
           echo "> ls"
           ls
+      - name: Send email
+        uses: dawidd6/action-send-mail@v4
+        with:
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: Github Actions Test Email
+          to: aalmquis@nmdp.org
+          from: aalmquis@nmdp.org
+          html_body: file://email.html
+          ignore_cert: true
+          convert_markdown: true
 
   check_java_latest:
     runs-on: ubuntu-latest
