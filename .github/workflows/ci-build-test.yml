@@ -34,8 +34,8 @@ jobs:
       - name: 'Sending SMS Notification'
         uses: twilio-labs/actions-sms@v1
         with:
-          FROM_PHONE_NUMBER: ${{ secrets.FROM_PHONE_NUMBER }}
-          TO_PHONE_NUMBER: ${{ secrets.TO_PHONE_NUMBER }}
+          fromPhoneNumber: ${{ secrets.FROM_PHONE_NUMBER }}
+          toPhoneNumber: ${{ secrets.TO_PHONE_NUMBER }}
           message: 'Hello from GitHub Action'
 
   check_java_latest:
