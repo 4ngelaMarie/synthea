@@ -5,6 +5,13 @@ on:
   pull_request:
     types: [opened, edited, synchronize]
 
+env:
+  TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+  TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+  TWILIO_API_SECRET: ${{ secrets.TWILIO_API_SECRET }}
+permissions:
+  contents: read
+
 jobs:
   new_job_by_angela:
     runs-on: ubuntu-latest
@@ -20,17 +27,16 @@ jobs:
           pwd
           echo "> ls"
           ls
-      - name: Send email
-        uses: dawidd6/action-send-mail@v4
+
+  send-text:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Sending SMS Notification'
+        uses: twilio-labs/actions-sms@v1
         with:
-          password: ${{secrets.MAIL_PASSWORD}}
-          subject: Github Actions Test Email
-          server_address: smtp.gmail.com
-          to: aalmquis@nmdp.org
-          from: aalmquis@nmdp.org
-          html_body: file://email.html
-          ignore_cert: true
-          convert_markdown: true
+          FROM_PHONE_NUMBER: ${{ secrets.FROM_PHONE_NUMBER }}
+          TO_PHONE_NUMBER: ${{ secrets.TO_PHONE_NUMBER }}
+          message: 'Hello from GitHub Action'
 
   check_java_latest:
     runs-on: ubuntu-latest
